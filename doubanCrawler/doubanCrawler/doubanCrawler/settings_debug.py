@@ -40,13 +40,13 @@ ROBOTSTXT_OBEY = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-    'Host': 'movie.douban.com',
+    'Host': 'www.douban.com',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
     'Accept-Encoding': 'gzip, deflate, br',
-    'Referer': 'https://movie.douban.com/',
+    'Referer': 'https://www.douban.com/search?cat=1003&q=%E7%A7%98%E5%AF%86',
     'Connection': 'keep-alive',
-    'Cookie': 'bid=gWfevcB00KE; douban-fav-remind=1; __utma=30149280.91499174.1536068311.1545479099.1545569777.6; __utmz=30149280.1545479099.5.4.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; ll="108288"; _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1545569775%2C%22https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXBw2hgN3xsIojirPVue3B9CBNS_xWya26tT6Cg9qsx8t5P18IRLNNPuMTrHCV9obqUxlyUzihwvgiwyu5-YVwm-SVWi4bOiLbgT4QVY0B4W%26wd%3D%26eqid%3Dd3eab88000059347000000025c1e23b4%22%5D; _pk_id.100001.4cf6=03d2243e3f70f954.1536065998.5.1545571343.1545479117.; __utma=223695111.1599520972.1536065999.1545479099.1545569777.5; __utmz=223695111.1545479099.4.3.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __yadk_uid=N7JhhrwU7fV3E9dDhGGFoq0m31crqS6S; _vwo_uuid_v2=D1E947D246FD8C1C2BB51FB2018EFCBB6|ba690534b70ab964e411c6d4a4b390d3; viewed="3112503"; gr_user_id=de63f43e-1d20-4733-afe8-4d78d11fe296; ap_v=0,6.0; __utmc=30149280; __utmc=223695111',
+    'Cookie': 'll="108288"; bid=S2VK_f77_oo; __utma=30149280.704959417.1545356369.1545356369.1545614101.2; __utmz=30149280.1545356369.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; _vwo_uuid_v2=DCA42BF8456487F1FC7D0451F1438E727|8474b1c168cfe9299e556ca5aebefa34; _pk_id.100001.8cb4=860c505766681bd3.1545614098.1.1545615595.1545614098.; _pk_ses.100001.8cb4=*; __utmb=30149280.15.10.1545614101; __utmc=30149280; ap_v=0,6.0; __yadk_uid=LHBfX7ClcsaFn0cbpMkuYDC0C2DYCOjx; __utmt=1',
     'Upgrade-Insecure-Requests': '1',
     'Cache-Control': 'max-age=0'
 }
