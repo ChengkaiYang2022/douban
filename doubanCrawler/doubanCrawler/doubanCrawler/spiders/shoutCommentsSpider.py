@@ -29,8 +29,9 @@ class shoutCommentsSpider(scrapy.Spider):
             if film_name == response.meta['film']:
                 print("获取ID")
                 print("抓取基本信息")
-                film_id_dict = content_selector.xpath(".//a").attrib['onclick']
-                a = json.loads(film_id_dict)
+                film_id_click = content_selector.xpath(".//a").attrib['onclick']
+                film_id = re.findall(r"sid:(.+?),", film_id_click)[0].strip()
+
                 film_score = ""
                 film_comments_number = ""
                 film_cast = ""
