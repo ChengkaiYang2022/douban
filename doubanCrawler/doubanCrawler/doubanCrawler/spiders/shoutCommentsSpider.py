@@ -1,7 +1,9 @@
+import json
+
 import scrapy
 
 from settings_debug import SEARCH_URL
-
+import re
 
 class shoutCommentsSpider(scrapy.Spider):
     name = "shoutComment"
@@ -22,8 +24,16 @@ class shoutCommentsSpider(scrapy.Spider):
         # a = response.xpath("//div[@class='content']").extract()
         for content_selector in response.xpath("//div[@class='content']"):
             print(content_selector)
+
             film_name = content_selector.xpath(".//a/text()").extract_first().strip()
             if film_name == response.meta['film']:
                 print("获取ID")
                 print("抓取基本信息")
+                film_id_dict = content_selector.xpath(".//a").attrib['onclick']
+                a = json.loads(film_id_dict)
+                film_score = ""
+                film_comments_number = ""
+                film_cast = ""
+                film_info = ""
+                return
 
