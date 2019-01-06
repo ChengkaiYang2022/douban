@@ -39,18 +39,29 @@ ROBOTSTXT_OBEY = False
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = {
+SEARCH_URL_REQUEST_HEADERS = {
     'Host': 'www.douban.com',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
     'Accept-Encoding': 'gzip, deflate, br',
-    'Referer': 'https://www.douban.com/search?cat=1003&q=%E7%A7%98%E5%AF%86',
+    'Referer': 'https://www.douban.com/search?cat=1003&q={0}',
     'Connection': 'keep-alive',
     'Cookie': 'll="108288"; bid=S2VK_f77_oo; __utma=30149280.704959417.1545356369.1545356369.1545614101.2; __utmz=30149280.1545356369.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; _vwo_uuid_v2=DCA42BF8456487F1FC7D0451F1438E727|8474b1c168cfe9299e556ca5aebefa34; _pk_id.100001.8cb4=860c505766681bd3.1545614098.1.1545615595.1545614098.; _pk_ses.100001.8cb4=*; __utmb=30149280.15.10.1545614101; __utmc=30149280; ap_v=0,6.0; __yadk_uid=LHBfX7ClcsaFn0cbpMkuYDC0C2DYCOjx; __utmt=1',
     'Upgrade-Insecure-Requests': '1',
     'Cache-Control': 'max-age=0'
 }
 
+COMMNETS_URL_REQUEST_HEADERS = {
+    'Host': 'movie.douban.com',
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0",
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive',
+    'Cookie': 'll="108288"; bid=S2VK_f77_oo; __utma=30149280.704959417.1545356369.1545356369.1545614101.2; __utmz=30149280.1545356369.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; _vwo_uuid_v2=DCA42BF8456487F1FC7D0451F1438E727|8474b1c168cfe9299e556ca5aebefa34; _pk_id.100001.8cb4=860c505766681bd3.1545614098.1.1545615595.1545614098.; _pk_ses.100001.8cb4=*; __utmb=30149280.15.10.1545614101; __utmc=30149280; ap_v=0,6.0; __yadk_uid=LHBfX7ClcsaFn0cbpMkuYDC0C2DYCOjx; __utmt=1',
+    'Upgrade-Insecure-Requests': '1',
+    'Cache-Control': 'max-age=0'
+}
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
@@ -96,3 +107,6 @@ DEFAULT_REQUEST_HEADERS = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 SEARCH_URL = "https://www.douban.com/search?cat=1002&q={0}"
+SHORT_COMMENTS_URL = "https://movie.douban.com/subject/{0}/comments?start=20&limit=20&sort={1}&status=P"
+ZUIRE_ORDER = 'new_score'
+ZUIXIN_ORDER = 'time'
