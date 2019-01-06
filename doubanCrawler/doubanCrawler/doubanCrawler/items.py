@@ -12,3 +12,7 @@ class DoubancrawlerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+class DoubanFilmItem(scrapy.Item):
+    pass
+class DoubanShoutCommentsItem(scrapy.Item):
+    pass
