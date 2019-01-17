@@ -9,15 +9,17 @@ from settings_debug import SEARCH_URL_REQUEST_HEADERS
 from settings_debug import COMMNETS_URL_REQUEST_HEADERS
 import re
 
+from items import DoubanFilmItem
+
+
 class shoutCommentsSpider(scrapy.Spider):
     name = "shoutComment"
     def start_requests(self):
-        urls = [
-            # 'https://movie.douban.com/subject_search?search_text=闺密&cat=1002'
-            'https://www.douban.com/search?cat=1002&q=闺蜜'
-            'https://www.douban.com/search?cat=1002&q=大三儿'
-            'https://www.douban.com/search?cat=1002&q=闺蜜'
-        ]
+        # urls = [
+        #     'https://www.douban.com/search?cat=1002&q=闺蜜'
+        #     'https://www.douban.com/search?cat=1002&q=大三儿'
+        #     'https://www.douban.com/search?cat=1002&q=闺蜜'
+        # ]
         film_list = ["大三儿", "闺蜜2", "闺蜜", "大象席地而坐"]
 
         for film in film_list:
@@ -46,11 +48,13 @@ class shoutCommentsSpider(scrapy.Spider):
                 comments_url = SHORT_COMMENTS_URL.format(str(film_id), ZUIRE_ORDER)
                 print(COMMNETS_URL_REQUEST_HEADERS)
                 yield scrapy.Request(url=comments_url, headers=COMMNETS_URL_REQUEST_HEADERS, callback=self.parse_comments)
-                film_score = ""
-                film_comments_number = ""
-                film_cast = ""
-                film_info = ""
-                return
+                dItem = DoubanFilmItem()
+                dItem['film_name'] = film_name
+                dItem['film_score'] = content_selector.xpath(".//span[@class='rating_nums']/text()").extract_first().strip()
+                dItem['film_comments_number'] = content_selector.xpath(".//span[3]/text()").extract_first().strip()
+                dItem['film_cast'] = content_selector.xpath(".//span[@class='subject-cast']/text()").extract_first().strip()
+                dItem['film_info'] = content_selector.xpath(".//p/text()").extract_first().strip()
+                yield dItem
     def parse_comments(self,response):
         print("执行翻页")
         print("完成抓取")
