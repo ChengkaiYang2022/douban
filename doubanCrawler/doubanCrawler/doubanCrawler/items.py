@@ -21,4 +21,11 @@ class DoubanFilmItem(scrapy.Item):
 
     pass
 class DoubanShoutCommentsItem(scrapy.Item):
+    comment_id = scrapy.Field()
+    people_link = scrapy.Field()
+    people_nickname = scrapy.Field()
+    comment_score = scrapy.Field()
+    comment_time = scrapy.Field()
+    comment_info = scrapy.Field()
+    comment_vote_number = scrapy.Field()
     pass

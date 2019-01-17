@@ -11,6 +11,8 @@ import re
 
 from items import DoubanFilmItem
 
+from items import DoubanShoutCommentsItem
+
 
 class shoutCommentsSpider(scrapy.Spider):
     name = "shoutComment"
@@ -20,7 +22,8 @@ class shoutCommentsSpider(scrapy.Spider):
         #     'https://www.douban.com/search?cat=1002&q=大三儿'
         #     'https://www.douban.com/search?cat=1002&q=闺蜜'
         # ]
-        film_list = ["大三儿", "闺蜜2", "闺蜜", "大象席地而坐"]
+        film_list = ["四个春天"]
+            # , "闺蜜2", "闺蜜", "大象席地而坐"]
 
         for film in film_list:
             request_url = SEARCH_URL.format(film)
@@ -47,7 +50,12 @@ class shoutCommentsSpider(scrapy.Spider):
                 # TODO response.follow中的refer默认为请求 时候的refer,后使用scrapy.spidermiddlewares.referer.RefererMiddlewarec处理
                 comments_url = SHORT_COMMENTS_URL.format(str(film_id), ZUIRE_ORDER)
                 print(COMMNETS_URL_REQUEST_HEADERS)
-                yield scrapy.Request(url=comments_url, headers=COMMNETS_URL_REQUEST_HEADERS, callback=self.parse_comments)
+                yield scrapy.Request(url=comments_url,
+                                     headers=COMMNETS_URL_REQUEST_HEADERS,
+                                     callback=self.parse_comments,
+                                     meta={"film_id": film_id,
+                                            "ZUIRE_ORDER":ZUIRE_ORDER
+                                           })
                 dItem = DoubanFilmItem()
                 dItem['film_name'] = film_name
                 dItem['film_score'] = content_selector.xpath(".//span[@class='rating_nums']/text()").extract_first().strip()
@@ -58,3 +66,26 @@ class shoutCommentsSpider(scrapy.Spider):
     def parse_comments(self,response):
         print("执行翻页")
         print("完成抓取")
+
+        url_start = re.findall(r"start=(.+?)&",response.url)[0]
+        try:
+            if int(url_start) > 199:
+                print("翻页完成结束")
+                return
+            else:
+                # 解析当前页面 获取页面
+                for comment_selector in response.xpath("//div[@class='comment-item']"):
+                    scItem = DoubanShoutCommentsItem()
+                    scItem['comment_id'] = comment_selector.attrib['data-cid']
+                    scItem['people_link'] = comment_selector.xpath(".//a[@href]")
+                    scItem['people_nickname'] = ''
+                    scItem['comment_score'] = ''
+                    scItem['comment_time'] = ''
+                    scItem['comment_info'] = ''
+                    scItem['comment_vote'] = ''
+                next_page_url = response.url.replace("start="+url_start,"start="+str(int(url_start)+20))
+                yield response.follow(url=next_page_url,callback=self.parse_comments)
+        except Exception as e:
+            print(e)
+
+
