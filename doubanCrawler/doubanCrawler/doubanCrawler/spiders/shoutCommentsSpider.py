@@ -57,6 +57,7 @@ class shoutCommentsSpider(scrapy.Spider):
                                             "ZUIRE_ORDER":ZUIRE_ORDER
                                            })
                 dItem = DoubanFilmItem()
+                dItem['film_id'] = film_id
                 dItem['film_name'] = film_name
                 dItem['film_score'] = content_selector.xpath(".//span[@class='rating_nums']/text()").extract_first().strip()
                 dItem['film_comments_number'] = content_selector.xpath(".//span[3]/text()").extract_first().strip()
@@ -76,15 +77,17 @@ class shoutCommentsSpider(scrapy.Spider):
                 # 解析当前页面 获取页面
                 for comment_selector in response.xpath("//div[@class='comment-item']"):
                     scItem = DoubanShoutCommentsItem()
+                    scItem['film_id'] = response.meta['film_id']
                     scItem['comment_id'] = comment_selector.attrib['data-cid']
-                    scItem['people_link'] = comment_selector.xpath(".//a[@href]")
-                    scItem['people_nickname'] = ''
-                    scItem['comment_score'] = ''
-                    scItem['comment_time'] = ''
-                    scItem['comment_info'] = ''
-                    scItem['comment_vote'] = ''
-                next_page_url = response.url.replace("start="+url_start,"start="+str(int(url_start)+20))
-                yield response.follow(url=next_page_url,callback=self.parse_comments)
+                    scItem['people_link'] = comment_selector.xpath(".//span[@class='comment-info']/a/@href").extract_first()
+                    scItem['people_nickname'] = comment_selector.xpath(".//span[@class='comment-info']/a/text()").extract_first().strip()
+                    scItem['comment_score'] = comment_selector.xpath(".//span[@class='comment-info']/span[2]/@class").extract_first()
+                    scItem['comment_time'] = comment_selector.xpath(".//span[@class='comment-time ']/@title").extract_first()
+                    scItem['comment_info'] = comment_selector.xpath(".//span[@class='short']/text()").extract_first().strip()
+                    scItem['comment_vote_number'] = comment_selector.xpath(".//span[@class='votes']/text()").extract_first().strip()
+                    yield scItem
+                next_page_url = response.url.replace("start="+url_start, "start="+str(int(url_start)+20))
+                yield response.follow(url=next_page_url, callback=self.parse_comments, meta={"film_id": response.meta['film_id']})
         except Exception as e:
             print(e)
 
