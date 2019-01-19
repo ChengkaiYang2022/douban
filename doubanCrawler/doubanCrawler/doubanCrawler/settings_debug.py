@@ -110,3 +110,4 @@ SEARCH_URL = "https://www.douban.com/search?cat=1002&q={0}"
 SHORT_COMMENTS_URL = "https://movie.douban.com/subject/{0}/comments?start=20&limit=20&sort={1}&status=P"
 ZUIRE_ORDER = 'new_score'
 ZUIXIN_ORDER = 'time'
+FEED_EXPORT_ENCODING = 'utf-8'
