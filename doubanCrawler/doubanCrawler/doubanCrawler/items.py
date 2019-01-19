@@ -13,6 +13,7 @@ class DoubancrawlerItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 class DoubanFilmItem(scrapy.Item):
+    film_id = scrapy.Field()
     film_name = scrapy.Field()
     film_score = scrapy.Field()
     film_comments_number = scrapy.Field()
@@ -21,6 +22,7 @@ class DoubanFilmItem(scrapy.Item):
 
     pass
 class DoubanShoutCommentsItem(scrapy.Item):
+    film_id = scrapy.Field()
     comment_id = scrapy.Field()
     people_link = scrapy.Field()
     people_nickname = scrapy.Field()
