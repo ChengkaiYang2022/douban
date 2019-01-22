@@ -24,7 +24,6 @@ class shoutCommentsSpider(scrapy.Spider):
         #     'https://www.douban.com/search?cat=1002&q=闺蜜'
         # ]
         film_list = ["四个春天", "大黄蜂", "大三儿", ""]
-            # , "闺蜜2", "闺蜜", "大象席地而坐"]
 
         for film in film_list:
             request_url = SEARCH_URL.format(film)

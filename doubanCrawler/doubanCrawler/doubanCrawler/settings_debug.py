@@ -111,3 +111,5 @@ SHORT_COMMENTS_URL = "https://movie.douban.com/subject/{0}/comments?start=20&lim
 ZUIRE_ORDER = 'new_score'
 ZUIXIN_ORDER = 'time'
 FEED_EXPORT_ENCODING = 'utf-8'
+MONGO_URI = "localhost:27017"
+MONGO_DATABASE = "douban"
