@@ -64,15 +64,15 @@ COMMNETS_URL_REQUEST_HEADERS = {
 }
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    'doubanCrawler.middlewares.DoubancrawlerSpiderMiddleware': 543,
-#}
+# }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'doubanCrawler.middlewares.DoubancrawlerDownloaderMiddleware': 543,
-#}
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -82,9 +82,9 @@ COMMNETS_URL_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'doubanCrawler.pipelines.DoubancrawlerPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'doubanCrawler.pipelines.DoubancrawlerMongoPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -111,3 +111,5 @@ SHORT_COMMENTS_URL = "https://movie.douban.com/subject/{0}/comments?start=20&lim
 ZUIRE_ORDER = 'new_score'
 ZUIXIN_ORDER = 'time'
 FEED_EXPORT_ENCODING = 'utf-8'
+MONGO_URI = "localhost:27017"
+MONGO_DATABASE = "douban"

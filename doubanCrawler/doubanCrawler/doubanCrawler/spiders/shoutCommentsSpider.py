@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import scrapy
@@ -22,8 +23,7 @@ class shoutCommentsSpider(scrapy.Spider):
         #     'https://www.douban.com/search?cat=1002&q=大三儿'
         #     'https://www.douban.com/search?cat=1002&q=闺蜜'
         # ]
-        film_list = ["四个春天"]
-            # , "闺蜜2", "闺蜜", "大象席地而坐"]
+        film_list = ["四个春天", "大黄蜂", "大三儿", ""]
 
         for film in film_list:
             request_url = SEARCH_URL.format(film)
@@ -63,6 +63,8 @@ class shoutCommentsSpider(scrapy.Spider):
                 dItem['film_comments_number'] = content_selector.xpath(".//span[3]/text()").extract_first().strip()
                 dItem['film_cast'] = content_selector.xpath(".//span[@class='subject-cast']/text()").extract_first().strip()
                 dItem['film_info'] = content_selector.xpath(".//p/text()").extract_first().strip()
+                dItem["crawled_time"] = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+
                 yield dItem
     def parse_comments(self,response):
         print("执行翻页")
@@ -85,6 +87,8 @@ class shoutCommentsSpider(scrapy.Spider):
                     scItem['comment_time'] = comment_selector.xpath(".//span[@class='comment-time ']/@title").extract_first()
                     scItem['comment_info'] = comment_selector.xpath(".//span[@class='short']/text()").extract_first().strip()
                     scItem['comment_vote_number'] = comment_selector.xpath(".//span[@class='votes']/text()").extract_first().strip()
+                    scItem["crawled_time"] = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+
                     yield scItem
                 next_page_url = response.url.replace("start="+url_start, "start="+str(int(url_start)+20))
                 yield response.follow(url=next_page_url, callback=self.parse_comments, meta={"film_id": response.meta['film_id']})

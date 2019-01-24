@@ -19,7 +19,7 @@ class DoubanFilmItem(scrapy.Item):
     film_comments_number = scrapy.Field()
     film_cast = scrapy.Field()
     film_info = scrapy.Field()
-
+    crawled_time = scrapy.Field()
     pass
 class DoubanShoutCommentsItem(scrapy.Item):
     film_id = scrapy.Field()
@@ -30,4 +30,5 @@ class DoubanShoutCommentsItem(scrapy.Item):
     comment_time = scrapy.Field()
     comment_info = scrapy.Field()
     comment_vote_number = scrapy.Field()
+    crawled_time = scrapy.Field()
     pass
