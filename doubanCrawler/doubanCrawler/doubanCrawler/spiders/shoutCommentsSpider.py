@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 
 import scrapy
 
@@ -23,9 +24,13 @@ class shoutCommentsSpider(scrapy.Spider):
         #     'https://www.douban.com/search?cat=1002&q=大三儿'
         #     'https://www.douban.com/search?cat=1002&q=闺蜜'
         # ]
-        film_list = ["四个春天", "大黄蜂", "大三儿", ""]
+        # film_list = ["死侍2：我爱我家","密室逃生","白蛇：缘起","“大”人物","燃点"]
+        print(os.getcwd())
+        with open("doubanCrawler/film_list.txt","r",encoding="utf-8") as f:
+            film_list = f.readlines()
 
         for film in film_list:
+            film = film.strip()
             request_url = SEARCH_URL.format(film)
             print(SEARCH_URL_REQUEST_HEADERS)
             SEARCH_URL_REQUEST_HEADERS['Referer'] = request_url
