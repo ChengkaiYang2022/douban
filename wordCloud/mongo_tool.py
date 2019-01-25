@@ -9,6 +9,5 @@ def write_file(film_id):
         # pprint.pprint(post['comment_info'])
         c_list.append(post['comment_info'])
     print(".".join(c_list))
-    with open(film_id+".txt","w",encoding="utf-8") as f:
+    with open("wc_cn/"+film_id+".txt","w",encoding="utf-8") as f:
         f.writelines(".".join(c_list))
-write_file(str(27191492))
