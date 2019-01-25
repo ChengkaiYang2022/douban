@@ -54,7 +54,7 @@ def make_wordcloud(film_id):
     text = open(path.join(d, d + '/wc_cn/{0}.txt').format(film_id)).read()
 
 
-    wc = WordCloud(font_path=font_path, background_color="white", max_words=1000,
+    wc = WordCloud(font_path=font_path, background_color="white", max_words=500,
                    # mask=back_coloring,
                    max_font_size=100, random_state=42, width=1000, height=860, margin=2, )
 
@@ -87,7 +87,7 @@ def make_wordcloud(film_id):
     # save wordcloud
     # wc.to_file(path.join(d, imgname2))
 if __name__ == "__main__":
-    film_id = "27119292"
+    film_id = "30331149"
     write_file(film_id)
 
     make_wordcloud(film_id)
