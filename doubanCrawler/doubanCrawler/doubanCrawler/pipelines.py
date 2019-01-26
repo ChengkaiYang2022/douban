@@ -27,6 +27,7 @@ class DoubancrawlerMongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
+        # TODO 抛出插入异常
         if item.__class__.__name__ == "DoubanFilmItem":
             self.db["DoubanFilm"].insert_one(dict(item))
         elif item.__class__.__name__ == "DoubanShoutCommentsItem":
